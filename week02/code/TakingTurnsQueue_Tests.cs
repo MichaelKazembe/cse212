@@ -13,11 +13,11 @@ public class TakingTurnsQueueTests
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
-    //   1. Enqueue was adding people to the front of the queue instead of the back,
-    //      making it behave like a Stack (LIFO) instead of a Queue (FIFO).
-    //   2. GetNextPerson() skipped people with exactly 1 turn left, preventing them from
-    //      completing their final turn and being removed from the queue.
-    //   3. As a result, Bob only appeared once instead of twice, and Sue came out early.
+    //          1 - Enqueue was adding people to the front of the queue instead of the back,
+    //              making it behave like a Stack (LIFO) instead of a Queue (FIFO).
+    //          2 - GetNextPerson() skipped people with exactly 1 turn left, preventing them from
+    //              completing their final turn and being removed from the queue.
+    //          3 - As a result, Bob only appeared once instead of twice, and Sue came out early.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         Debug.WriteLine("*** Test: FiniteRepetition ***");
@@ -54,10 +54,10 @@ public class TakingTurnsQueueTests
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found:
-    //   1. Enqueue adds to the front instead of the back, causing new players like George to
-    //      jump ahead in the queue rather than waiting their own turn.
-    //   2. GetNextPerson() skips people with exactly 1 turn left, so Bob's second turn and
-    //      Sue's final turn are skipped.
+    //          1 - Enqueue adds to the front instead of the back, causing new players like George to
+    //              jump ahead in the queue rather than waiting their own turn.
+    //          2 - GetNextPerson() skips people with exactly 1 turn left, so Bob's second turn and
+    //              Sue's final turn are skipped.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         Debug.WriteLine("*** Test: AddPlayerMidway ***");
@@ -107,11 +107,11 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found:
-    //   1. Enqueue adds to the front, causing the queue to reverse order (Stack behavior).
-    //   2. GetNextPerson() skips people with exactly 1 turn left, so Bob's and Sue's final
-    //      turns don't complete properly.
-    //   3. Tim (with infinite turns) should stay in the queue, but the wrong turn order
-    //      breaks the expected pattern between finite and infinite players.
+    //          1 - Enqueue adds to the front, causing the queue to reverse order (Stack behavior).
+    //          2 - GetNextPerson() skips people with exactly 1 turn left, so Bob's and Sue's final
+    //              turns don't complete properly.
+    //          3 - Tim (with infinite turns) should stay in the queue, but the wrong turn order
+    //              breaks the expected pattern between finite and infinite players.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         Debug.WriteLine("*** Test: ForeverZero ***");
@@ -147,11 +147,11 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found:
-    //   1. Enqueue adds to the front, reversing the queue order (Stack behavior instead of Queue).
-    //   2. GetNextPerson() skips Sue's final turn when she has exactly 1 turn left,
-    //      preventing her from completing her rotation.
-    //   3. Tim (with negative turns which translates infinite turns) should serve correctly in the expected order,
-    //      but the bugs break the Tim/Sue pattern.
+    //          1 - Enqueue adds to the front, reversing the queue order (Stack behavior instead of Queue).
+    //          2 - GetNextPerson() skips Sue's final turn when she has exactly 1 turn left,
+    //              preventing her from completing her rotation.
+    //          3 - Tim (with negative turns which translates infinite turns) should serve correctly in the expected order,
+    //              but the bugs break the Tim/Sue pattern.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         Debug.WriteLine("*** Test: ForeverNegative ***");
@@ -200,9 +200,8 @@ public class TakingTurnsQueueTests
         }
         catch (InvalidOperationException e)
         {
-            Debug.WriteLine($"Caught expected InvalidOperationException: '{e.Message}'");
             Assert.AreEqual("No one in the queue.", e.Message);
-            Debug.WriteLine("Test completed: Exception with correct message received");
+            Debug.WriteLine($"Caught expected InvalidOperationException: '{e.Message}'");
         }
         catch (AssertFailedException)
         {
