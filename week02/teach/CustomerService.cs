@@ -4,31 +4,33 @@
 /// </summary>
 public class CustomerService {
     public static void Run() {
-        // Example code to see what's in the customer service queue:
-        // var cs = new CustomerService(10);
-        // Console.WriteLine(cs);
-
-        // Test Cases
-
-        // Test 1
-        // Scenario: 
-        // Expected Result: 
-        Console.WriteLine("Test 1");
-
-        // Defect(s) Found: 
-
+        // Test 1: Create queue with valid size, add customers until full
+        Console.WriteLine("Test 1: Add customers until full");
+        var cs1 = new CustomerService(2);
+        cs1.AddNewCustomerTest("Alice", "A1", "Password reset");
+        cs1.AddNewCustomerTest("Bob", "B2", "Cannot login");
+        cs1.AddNewCustomerTest("Charlie", "C3", "Account locked"); // Should show error
+        Console.WriteLine(cs1);
         Console.WriteLine("=================");
 
-        // Test 2
-        // Scenario: 
-        // Expected Result: 
-        Console.WriteLine("Test 2");
-
-        // Defect(s) Found: 
-
+        // Test 2: Create queue with invalid size, should default to 10
+        Console.WriteLine("Test 2: Invalid size defaults to 10");
+        var cs2 = new CustomerService(0);
+        for (int i = 0; i < 11; i++)
+            cs2.AddNewCustomerTest($"User{i}", $"ID{i}", "Test"); // 11th should show error
+        Console.WriteLine(cs2);
         Console.WriteLine("=================");
 
-        // Add more Test Cases As Needed Below
+        // Test 3: Serve customers until empty
+        Console.WriteLine("Test 3: Serve customers until empty");
+        var cs3 = new CustomerService(2);
+        cs3.AddNewCustomerTest("Dave", "D4", "Forgot password");
+        cs3.AddNewCustomerTest("Eve", "E5", "Billing issue");
+        cs3.ServeCustomerTest(); // Should serve Dave
+        cs3.ServeCustomerTest(); // Should serve Eve
+        cs3.ServeCustomerTest(); // Should show error (empty)
+        Console.WriteLine(cs3);
+        Console.WriteLine("=================");
     }
 
     private readonly List<Customer> _queue = new();
@@ -65,21 +67,12 @@ public class CustomerService {
     /// Prompt the user for the customer and problem information.  Put the 
     /// new record into the queue.
     /// </summary>
-    private void AddNewCustomer() {
-        // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+    // Test helper for AddNewCustomer (bypasses Console input)
+    public void AddNewCustomerTest(string name, string accountId, string problem) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
-
-        Console.Write("Customer Name: ");
-        var name = Console.ReadLine()!.Trim();
-        Console.Write("Account Id: ");
-        var accountId = Console.ReadLine()!.Trim();
-        Console.Write("Problem: ");
-        var problem = Console.ReadLine()!.Trim();
-
-        // Create the customer object and add it to the queue
         var customer = new Customer(name, accountId, problem);
         _queue.Add(customer);
     }
@@ -87,10 +80,15 @@ public class CustomerService {
     /// <summary>
     /// Dequeue the next customer and display the information.
     /// </summary>
-    private void ServeCustomer() {
-        _queue.RemoveAt(0);
+    // Test helper for ServeCustomer (bypasses Console input)
+    public void ServeCustomerTest() {
+        if (_queue.Count == 0) {
+            Console.WriteLine("No customers in queue.");
+            return;
+        }
         var customer = _queue[0];
-        Console.WriteLine(customer);
+        Console.WriteLine($"Serving: {customer}");
+        _queue.RemoveAt(0);
     }
 
     /// <summary>
