@@ -1,4 +1,5 @@
-﻿public class DuplicateCounter
+﻿using System.Diagnostics;
+public class DuplicateCounter
 {
     //Count how many duplicates are in a collection of data.
 
@@ -24,7 +25,10 @@
 
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        var uniqueSet = new HashSet<int>(data); // Create a unique Set Without duplicates
+        var setLength = uniqueSet.Count; // Find length of unique set
+        var dataLength = data.Length; // Find length of data List
+
+        return dataLength - setLength;
     }
 }
