@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 
 // DO NOT MODIFY THIS FILE
 
@@ -9,14 +10,18 @@ public class SumSquaresRecursiveTests
     public void SumSquaresRecursive_Small()
     {
         var result = Recursion.SumSquaresRecursive(10);
+        Debug.WriteLine($"SumSquaresRecursive(10) = {result}");
         Assert.AreEqual(385, result);
+        Debug.WriteLine($"SumSquaresRecursive(10) = {result}");
     }
 
     [TestMethod]
     public void SumSquaresRecursive_Large()
     {
         var result = Recursion.SumSquaresRecursive(100);
+        Debug.WriteLine($"SumSquaresRecursive(100) = {result}");
         Assert.AreEqual(338350, result);
+        Debug.WriteLine($"SumSquaresRecursive(100) = {result}");
     }
 }
 
@@ -28,6 +33,7 @@ public class PermutationsChooseTests
     {
         var results = new List<string>();
         Recursion.PermutationsChoose(results, "ABCD", 3);
+        Debug.WriteLine($"PermutationsChoose(results, \"ABCD\", 3) generated {results.Count} permutations.");
 
         results.Sort();
         var expected = new List<string> {
@@ -57,6 +63,7 @@ public class PermutationsChooseTests
             "DCB"
         };
         CollectionAssert.AreEqual(expected, results);
+        Debug.WriteLine($"PermutationsChoose(results, \"ABCD\", 3) generated {results.Count} permutations.");
     }
 
     [TestMethod]
@@ -64,6 +71,7 @@ public class PermutationsChooseTests
     {
         var results = new List<string>();
         Recursion.PermutationsChoose(results, "ABCD", 2);
+        Debug.WriteLine($"PermutationsChoose(results, \"ABCD\", 2) generated {results.Count} permutations.");
 
         results.Sort();
         var expected = new List<string> {
@@ -80,7 +88,9 @@ public class PermutationsChooseTests
             "DB",
             "DC"
         };
+
         CollectionAssert.AreEqual(expected, results);
+        Debug.WriteLine($"PermutationsChoose(results, \"ABCD\", 2) generated {results.Count} permutations.");
     }
 
     [TestMethod]
@@ -90,6 +100,7 @@ public class PermutationsChooseTests
         Recursion.PermutationsChoose(results, "ABCD", 1);
 
         results.Sort();
+        Debug.WriteLine($"PermutationsChoose(results, \"ABCD\", 1) generated {results.Count} permutations.");
         var expected = new List<string> {
             "A",
             "B",
@@ -97,6 +108,7 @@ public class PermutationsChooseTests
             "D"
         };
         CollectionAssert.AreEqual(expected, results);
+        Debug.WriteLine($"PermutationsChoose(results, \"ABCD\", 1) generated {results.Count} permutations.");
     }
 }
 
@@ -107,6 +119,7 @@ public class CountWaysToClimbTests
     public void CountWaysToClimb_Small()
     {
         var result = Recursion.CountWaysToClimb(5);
+        Debug.WriteLine($"CountWaysToClimb(5) = {result}");
         Assert.AreEqual(13, result);
     }
 
@@ -114,6 +127,7 @@ public class CountWaysToClimbTests
     public void CountWaysToClimb_Medium()
     {
         var result = Recursion.CountWaysToClimb(20);
+        Debug.WriteLine($"CountWaysToClimb(20) = {result}");
         Assert.AreEqual(121415, result);
     }
 
@@ -121,6 +135,7 @@ public class CountWaysToClimbTests
     public void CountWaysToClimb_Large()
     {
         var result = Recursion.CountWaysToClimb(100);
+        Debug.WriteLine($"CountWaysToClimb(100) = {result}");
         Assert.AreEqual(180396380815100901214157639M, result);
     }
 }
@@ -133,6 +148,7 @@ public class WildcardBinaryTests
     {
         var results = new List<string>();
         Recursion.WildcardBinary("110*0*", results);
+        Debug.WriteLine($"WildcardBinary(\"110*0*\", results) generated {results.Count} results.");
 
         results.Sort();
         var expected = new List<string> {
@@ -142,6 +158,7 @@ public class WildcardBinaryTests
             "110101"
         };
         CollectionAssert.AreEqual(expected, results);
+        Debug.WriteLine($"WildcardBinary(\"110*0*\", results) generated {results.Count} results.");
     }
 
     [TestMethod]
