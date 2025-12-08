@@ -21,7 +21,7 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else
+        else if (value > Data)
         {
             // Insert to the right
             if (Right is null)
@@ -29,6 +29,12 @@ public class Node
             else
                 Right.Insert(value);
         }
+        else
+        {
+            // if value == data (already exists) in the tree, do nothing
+            return;
+        }
+
     }
 
     public bool Contains(int value)
