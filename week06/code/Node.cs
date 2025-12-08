@@ -1,3 +1,5 @@
+using System;
+
 public class Node
 {
     public int Data { get; set; }
@@ -65,6 +67,8 @@ public class Node
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int leftHeight = Left != null ? Left.GetHeight() : 0; // left subtree height
+        int rightHeight = Right != null ? Right.GetHeight() : 0; // right subtree height
+        return 1 + Math.Max(leftHeight, rightHeight); // height of the current node
     }
 }
